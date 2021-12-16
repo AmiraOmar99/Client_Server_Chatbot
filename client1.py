@@ -4,7 +4,8 @@ HEADER = 256
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-SERVER = "192.168.30.1"
+SERVER = "192.168.168.1"
+
 # SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 
@@ -31,6 +32,6 @@ def send(msg):
 # send(patient_age)
 consult_activate=input("Enter CONSULT to activate symptoms check: ")
 send(consult_activate)
-
-
+pain=input(" ")
+send(pain)
 # send(DISCONNECT_MESSAGE)
