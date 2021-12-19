@@ -53,13 +53,9 @@ PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
-# ALAA's
-SERVER = "192.168.168.1"
 
-# # GAD's
-# SERVER = "192.168.1.7"
+SERVER = socket.gethostbyname(socket.gethostname())
 
-# SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

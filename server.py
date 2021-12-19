@@ -8,7 +8,7 @@ ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 CONSULT_ACTIVATE= "CONSULT"
-
+IDLE_MESSAGE = 'IDLE'
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
@@ -17,12 +17,15 @@ def handle_client(conn, addr):
 
     connected = True
     while connected:
+        # try:
         # symptoms=[]
         # count_common=0
         # count_less=0
         # count_severe=0
+        # conn.settimeout(20.0)
         count=0
         msg_length = conn.recv(HEADER).decode(FORMAT)
+        # conn.settimeout(None)
         if msg_length:
             msg_length = int(msg_length)
             msg = conn.recv(msg_length).decode(FORMAT)
@@ -49,6 +52,9 @@ def handle_client(conn, addr):
                 conn.send("Choose all that apply: [cough, fever, headache , fatigue , Diarrhoea , chest pain, loss of taste or smell , sore throat , rash]".encode(FORMAT))
             print(f"[{addr}] {msg}")
             # conn.send("Msg received".encode(FORMAT))
+        # except socket.timeout as e:
+        #     print("Timeout")
+        #     connected=False
        
                
         
