@@ -10,6 +10,43 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import socket
+import mysql.connector as mysql 
+
+mydb = mysql.connect(
+    host="localhost",
+    user="root",
+    passwd="mysql"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("SHOW DATABASES")
+
+y = True
+for x in mycursor:
+    print(x)
+    if x == ('myserver',):
+        y = False
+
+if y:
+    mycursor.execute("CREATE DATABASE myserver")
+
+mydb = mysql.connect(
+  host="localhost",
+  user="root",
+  passwd="mysql",
+  database="myserver"
+)
+mycursor = mydb.cursor()
+mycursor.execute("SHOW TABLES")
+y = True
+for x in mycursor:
+    if x == ('patients',):
+        y = False
+if y:
+    mycursor.execute("CREATE TABLE patients (PatientFirstName VARCHAR(50),PatientLastName VARCHAR(50),PatientSSN VARCHAR(50),PatientAge VARCHAR(50),ChronicDisease VARCHAR(50),PatientGender VARCHAR(50))")
+
+
 
 HEADER = 256
 PORT = 5050
@@ -20,7 +57,7 @@ DISCONNECT_MESSAGE = "!DISCONNECT"
 # SERVER = "192.168.168.1"
 
 # GAD's
-SERVER = "192.168.1.8"
+SERVER = "192.168.1.7"
 
 # SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
@@ -465,6 +502,10 @@ class Ui_MainWindow(object):
         send(chronic)
         gender = self.gender_combo.currentText()
         send(gender)
+        sql = "INSERT INTO patients (PatientFirstName,PatientLastName,PatientSSN,PatientAge,ChronicDisease,PatientGender) VALUES(%s,%s,%s,%s,%s,%s)"
+        val = (first_name, last_name,age, ssn, chronic,gender)
+        mycursor.execute(sql,val)
+        mydb.commit()
         print(first_name, last_name,age, ssn, chronic,gender)
         for item in self.data:
             item.hide()
