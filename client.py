@@ -54,10 +54,10 @@ FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
 # ALAA's
-# SERVER = "192.168.168.1"
+SERVER = "192.168.168.1"
 
-# GAD's
-SERVER = "192.168.1.7"
+# # GAD's
+# SERVER = "192.168.1.7"
 
 # SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
@@ -526,17 +526,18 @@ class Ui_MainWindow(object):
         sever_symp=0
         self.consult.hide()
 
-        for symp in self.comm:
-            if symp.isChecked == True:
+        for i in range(len(self.comm)):
+            if (self.comm[i].isChecked()) :
                 common_symp+=1
             
-        for symp in self.less_list:
-            if symp.isChecked == True:
+        for i in range(len(self.less_list)):
+            if (self.less_list[i].isChecked()) :
                 less_symp+=1
+             
 
 
-        for symp in self.sev:
-            if symp.isChecked == True:
+        for i in range(len(self.sev)):
+            if (self.sev[i].isChecked()):
                 sever_symp+=1
 
         if (sever_symp>0):
