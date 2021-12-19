@@ -4,7 +4,12 @@ HEADER = 256
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-SERVER = "192.168.168.1"
+
+# ALAA's
+# SERVER = "192.168.168.1"
+
+# GAD's
+SERVER = "192.168.1.8"
 
 # SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)

@@ -28,18 +28,22 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 connected = False
-            if "Name" in msg:
-                conn.send("Hello".encode(FORMAT))
-            if "ssn" in msg:
-                conn.send("ok".encode(FORMAT))
-            if "ID" in msg:
-                conn.send("ok".encode(FORMAT))
-            if "age" in msg:
-                conn.send("ok".encode(FORMAT))
-            if "pain" in msg:
-                conn.send("oh".encode(FORMAT))
+            # if "Name" in msg:
+            #     conn.send("Hello".encode(FORMAT))
+            # if "ssn" in msg:
+            #     conn.send("ok".encode(FORMAT))
+            # if "ID" in msg:
+            #     conn.send("ok".encode(FORMAT))
+            # if "age" in msg:
+            #     conn.send("ok".encode(FORMAT))
+            # if "pain" in msg:
+            #     conn.send("oh".encode(FORMAT))
+            
+            if ((count ==0)&(msg !=CONSULT_ACTIVATE)):
+                conn.send("Message recieved".encode(FORMAT))
+            
 
-            if (msg == CONSULT_ACTIVATE):  
+            if((count==0) &(msg == CONSULT_ACTIVATE )):  
                 # count_common=count_common+1    
                 # print(count_common)
                 conn.send("Choose all that apply: [cough, fever, headache , fatigue , Diarrhoea , chest pain, loss of taste or smell , sore throat , rash]".encode(FORMAT))
