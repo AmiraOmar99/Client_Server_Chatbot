@@ -11,6 +11,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import socket
 import mysql.connector as mysql 
+import threading
+# import server as srv
+from idle_time import IdleMonitor
+
+monitor = IdleMonitor.get_monitor()
+timee=monitor.get_idle_time()
+print(timee)
 
 mydb = mysql.connect(
     host="localhost",
@@ -61,6 +68,10 @@ ADDR = (SERVER, PORT)
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDR)
 
+idle_status= False
+def getIdleTime():
+    return (win32api.GetTickCount() - win32api.GetLastInputInfo()) / 1000.0
+
 def send(msg):
     message = msg.encode(FORMAT)
     msg_length = len(message)
@@ -72,7 +83,12 @@ def send(msg):
 
 
 
-class Ui_MainWindow(object):
+# class Ui_MainWindow(object):
+class Ui_MainWindow(QtWidgets.QMainWindow):
+    # def __init__(self):
+    #     QtGui.QMainWindow.__init__(self)
+    #     self.ui=Ui_MainWindow()
+    #     self.ui.setupUi(self)
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("DocBot")
         title='DocBot'
@@ -483,6 +499,17 @@ class Ui_MainWindow(object):
         self.less_list=[self.fever, self.diarrhea, self.throat]
         self.sev=[self.chest, self.taste, self.rash]
 
+        self.timer = QtCore.QTimer(self)
+
+        # * adding action to timer
+        self.timer.timeout.connect(self.check_timeout)
+
+        # * update the timer every tenth second
+        self.timer.start(100)
+
+        # * execute client handling in a new thread
+        # self.thread = threading.Thread(target=self.recieve_status_message)
+        # self.thread.start()
 
     def get_data(self):
 
@@ -561,7 +588,21 @@ class Ui_MainWindow(object):
         self.widget.hide()
         
         for item in self.data:
-            item.hide()       
+            item.hide()     
+
+    def check_timeout(self):
+        """
+            check_timeout: keeps checking if the server is idle or not
+        """
+
+        monitor = IdleMonitor.get_monitor()
+        timee=monitor.get_idle_time()
+        if timee>20.0:
+        #     idle_status = True
+        # if idle_status:
+            QtWidgets.QMessageBox.warning(
+                self, "Connection Lost", "[IDLE] Connection was closed please open the UI again")
+            sys.exit()  
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
