@@ -490,7 +490,7 @@ class Ui_MainWindow(object):
         send(first_name)
         last_name = self.lst_name_box.text()
         send(last_name)
-        ssn = self.lst_name_box.text()
+        ssn = self.ssn_box.text()
         send(ssn)
         age = self.age_box.text()
         send(age)
@@ -499,10 +499,10 @@ class Ui_MainWindow(object):
         gender = self.gender_combo.currentText()
         send(gender)
         sql = "INSERT INTO patients (PatientFirstName,PatientLastName,PatientSSN,PatientAge,ChronicDisease,PatientGender) VALUES(%s,%s,%s,%s,%s,%s)"
-        val = (first_name, last_name,age, ssn, chronic,gender)
+        val = (first_name, last_name,ssn, age, chronic,gender)
         mycursor.execute(sql,val)
         mydb.commit()
-        print(first_name, last_name,age, ssn, chronic,gender)
+        print(first_name, last_name,ssn, age, chronic,gender)
         for item in self.data:
             item.hide()
         self.add.hide()
