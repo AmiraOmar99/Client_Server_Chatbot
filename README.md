@@ -20,7 +20,11 @@ Submitted by:
 
 Video: [Link Here](//link)
 
-**The programming langusage is python**
+//security
+//test case
+//timeout message
+
+**The programming language is python**
 
 ### Libraries in python,Apps to be downloaded
 - socket (*python library*)
@@ -83,7 +87,8 @@ Yoy have 20 seconds to enter your data or you will have message that server is d
   
 - Database
   
-<img src="screenshots/database.png" alt="Database" width="600" height="400"/>
+<img src="screenshots/data_base.png" alt="Database" width="800" height="400"/>
+
 
 - The patient has limited time `timeout` to enter his personal data which arround 20 sec.Then the server closes the connection and the message box will appear to tell him that the connection was closed.
   
