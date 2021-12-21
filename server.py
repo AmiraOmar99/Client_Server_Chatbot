@@ -40,7 +40,7 @@ def handle_client(conn, addr):
         except socket.timeout as e:
             print("Timeout")
             print(f"[DISCONNECTED] {addr} has disconnected")
-            # connected=False
+            connected=False
             
     conn.close()
 
