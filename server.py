@@ -37,15 +37,17 @@ def handle_client(conn, addr):
                 msg_length = int(msg_length)
                 msg = conn.recv(msg_length)
                 msg= fernet.decrypt(msg).decode()
-                print("Message",msg)
-                if msg == DISCONNECT_MESSAGE:
+                if msg != DISCONNECT_MESSAGE:
+                    print("Message",msg)
+                else:
+                    print(f"[DISCONNECTED] {addr} has disconnected")
                     connected = False
                 
-                if ((count ==0)&((Pain not in msg))):
+                if ((count ==0)&((Pain not in msg)&(msg != 'check'))):
                     conn.send("Message recieved".encode(FORMAT))
                 
 
-                if((count==0) &(Pain in msg)):
+                if((count==0) &(Pain in msg)&(msg != 'check')):
                     
                     if ("sever" in msg):
                         conn.send("SEE A DOCTOR IMMEDIATELY !!!! ".encode(FORMAT))
@@ -61,7 +63,7 @@ def handle_client(conn, addr):
             print("Timeout")
             print(f"[DISCONNECTED] {addr} has disconnected")
             conn.send("Timeout".encode(FORMAT))
-            time.sleep(10)
+            time.sleep(100)
             connected=False
             
     conn.close()
