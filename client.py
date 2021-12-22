@@ -10,13 +10,12 @@ from PyQt5.QtWidgets import QMessageBox
 import cryptography
 from cryptography import fernet
 from cryptography.fernet import Fernet
-import schedule
 import time
 
-key = b'h_31cC-cjISYrMX7FABt_GEXpKRAXerreSXay8LesC0='
+key = b'h_31cC-cjISYrMX7FABt_GEXpKRAXerreSXay8LesC0='# generating key for security purpose
 fernet =Fernet(key)
 
-
+# Connecting to mysql
 mydb = mysql.connect(
     host="localhost",
     user="root",
@@ -24,18 +23,36 @@ mydb = mysql.connect(
 )
 
 mycursor = mydb.cursor()
-
+# Showing existing databases
 mycursor.execute("SHOW DATABASES")
-
+# Checking if myserver database is exist 
 y = True
 for x in mycursor:
     print(x)
     if x == ('myserver',):
         y = False
-
+# If not exist create myserver database
 if y:
     mycursor.execute("CREATE DATABASE myserver")
+# Connecting to myserver database
 
+mydb = mysql.connect(
+  host="localhost",
+  user="root",
+  passwd="mysql",
+  database="myserver"
+)
+mycursor = mydb.cursor()
+# Showing existing tables
+mycursor.execute("SHOW TABLES")
+# Checking if patients table is exist 
+y = True
+for x in mycursor:
+    if x == ('patients',):
+        y = False
+# If not exist create paients table   
+if y:
+    mycursor.execute("CREATE TABLE patients (PatientFirstName VARCHAR(50),PatientLastName VARCHAR(50),PatientSSN VARCHAR(50),PatientAge VARCHAR(50),ChronicDisease VARCHAR(50),PatientGender VARCHAR(50))")
 
 ## INITIALIZING THE CONNECTION PARAMETERS ##
 HEADER = 256
@@ -49,16 +66,16 @@ SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDR)
+client.connect(ADDR) #connecting to the server
 
 ## Sendinig messages function from client to server
 def send(msg):
-    message= fernet.encrypt(msg.encode())
+    message= fernet.encrypt(msg.encode()) #encrypt each message before sending to server
     msg_length = len(message)
     send_length = str(msg_length).encode(FORMAT)
-    send_length += b' ' * (HEADER - len(send_length))
-    client.send(send_length)
-    client.send(message)
+    send_length += b' ' * (HEADER - len(send_length))#padding the length of the message to be of length 256
+    client.send(send_length) #send the first message (length of actual message)
+    client.send(message)#sends the message itself
     if message == 'check':
         pass
     else:
@@ -109,6 +126,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         gender = self.ui.gender_combo.currentText()
         send(gender)
         self.check_timeout(x=recieve())
+        # Insert Patient information to patients table in myserver database
         sql = "INSERT INTO patients (PatientFirstName,PatientLastName,PatientSSN,PatientAge,ChronicDisease,PatientGender) VALUES(%s,%s,%s,%s,%s,%s)"
         val = (first_name, last_name,ssn, age, chronic,gender)
         mycursor.execute(sql,val)

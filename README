@@ -18,20 +18,26 @@ Submitted by:
 | Mariam Mohamed Osama |    2    |  26  |
 
 
-Video: [Link Here](//link)
+Video: [Link Here](https://link)
 
-//security
-//test case
-//timeout message
+Github Repo: [Link Here](https://github.com/AmiraOmar99/Client_Server_Chatbot)
 
-**The programming language is python**
+
+
+
+**The programming langusage is Python 3.8**
 
 ### Libraries in python,Apps to be downloaded
 - socket (*python library*)
 - threading (*python library*)
 - mysql (*python library*)
 - PyQt5 (*python library*)
+- Cryptography (*python library*)
+- time (*python library*)
 - Ampps (*app*)
+
+**To install the libraries, write in the terminal Pip install 'library name'**
+
 
 ### How to run 
 
@@ -53,10 +59,12 @@ Video: [Link Here](//link)
 
 9. You will get a message with best decision for you.
 
-10. security//
+10. We add security to our applicatioin in order to secure data entered by client (user).
+
+11. Data like (Firstname , Lastname , Age , SSN and gander , symptoms ) all will be encrypted with a private key before sending them to server.
 
 **Note**
-Yoy have 20 seconds to enter your data or you will have message that server is disconnected and you will leave the app.
+Yoy have 30 seconds to enter your data or you will have message that server is disconnected (`TimeOut`) and you will leave the app.
 
 
 
@@ -87,10 +95,11 @@ Yoy have 20 seconds to enter your data or you will have message that server is d
   
 - Database
   
-<img src="screenshots/data_base.png" alt="Database" width="800" height="400"/>
+<img src="screenshots/data_base.png" alt="Database" width="600" height="400"/>
 
 
-- The patient has limited time `timeout` to enter his personal data which arround 20 sec.Then the server closes the connection and the message box will appear to tell him that the connection was closed.
+
+- The patient has limited time `timeout` to enter his personal data which arround 30 sec.Then the server closes the connection and the message box will appear to tell him that the connection was closed.
   
 - TimeOut_Server
 
@@ -98,7 +107,8 @@ Yoy have 20 seconds to enter your data or you will have message that server is d
 
 - TimeOut_Client messagebox
 
-<img src="screenshots/Timed_out.png" alt="Time Out" width="600" height="300"/>
+<img src="screenshots/Timed_out.png" alt="Time Out" width="500" height="300"/>
+
 
 - Multiple clients can access to the server, each client has its own thread `threading`(connection) and it's totally independent of the other clients'connections to the server.
 
@@ -111,7 +121,7 @@ Yoy have 20 seconds to enter your data or you will have message that server is d
 <img src="screenshots/conn.png" alt="connections" width="600" height="200"/>
 
 
-- security....
+- security
 
 <img src="screenshots/security.png" alt="security" width="600" height="300"/>
 
@@ -119,15 +129,15 @@ Yoy have 20 seconds to enter your data or you will have message that server is d
 
 1. Rest at Home
 
-<img src="screenshots/Case_1.png" alt="Case 1" width="600" height="300"/>
+<img src="screenshots/Case_1.png" alt="Case 1" width="500" height="300"/>
 
 
 2. Isolate at Home
 
-<img src="screenshots/Case_2.png" alt="Case 2" width="600" height="300"/>
+<img src="screenshots/Case_2.png" alt="Case 2" width="500" height="300"/>
 
 
 3. SEE A DOCTOR IMMEDIATELY!!!!!
 
-<img src="screenshots/Case_3.png" alt="Case 3" width="600" height="300"/>
+<img src="screenshots/Case_3.png" alt="Case 3" width="500" height="300"/>
 
