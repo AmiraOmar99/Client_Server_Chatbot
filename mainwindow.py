@@ -11,8 +11,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-# class Ui_MainWindow(object):
-class Ui_MainWindow(QtWidgets.QMainWindow):
+class Ui_MainWindow(object):
+# class Ui_MainWindow(QtWidgets.QMainWindow):
     # def __init__(self):
     #     QtGui.QMainWindow.__init__(self)
     #     self.ui=Ui_MainWindow()
@@ -423,7 +423,13 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.less_list=[self.fever, self.diarrhea, self.throat]
         self.sev=[self.chest, self.taste, self.rash]
 
+        # self.timer = QtCore.QTimer()
 
+        # # # # * adding action to timer
+        # # self.timer.timeout.connect(self.check_timeout(x=recieve()))
+
+        # # * update the timer every tenth second
+        # self.timer.start(100)
 
 
     def retranslateUi(self, MainWindow):
