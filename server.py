@@ -15,6 +15,13 @@ ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 Pain="pain"
+<<<<<<< HEAD
+=======
+CONSULT_ACTIVATE= "CONSULT"
+comm=["cough", "fatigue", "headache"]
+less_list=["fever", "diarrhea", "throat"]
+sev=["chest", "taste", "rash"]
+>>>>>>> 1f13377445eff202de6fcf2f8983799e998408b0
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
@@ -28,7 +35,11 @@ def handle_client(conn, addr):
             less_symp=0
             sever_symp=0
             
+<<<<<<< HEAD
             conn.settimeout(30.0)
+=======
+            conn.settimeout(50.0)
+>>>>>>> 1f13377445eff202de6fcf2f8983799e998408b0
             count=0
             var=0
             msg_length = conn.recv(HEADER).decode(FORMAT)
@@ -41,11 +52,22 @@ def handle_client(conn, addr):
                 if msg == DISCONNECT_MESSAGE:
                     connected = False
                 
+<<<<<<< HEAD
                 if ((count ==0)&((Pain not in msg))):
                     conn.send("Message recieved".encode(FORMAT))
                 
 
                 if((count==0) &(Pain in msg)):
+=======
+                if ((count ==0)&(msg !=CONSULT_ACTIVATE)&((Pain not in msg))):
+                    conn.send("Message recieved".encode(FORMAT))
+                
+
+                if((count==0) &(msg == CONSULT_ACTIVATE )&(msg !=Pain)):  
+                   
+                    conn.send("Choose all that apply: [cough, fever, headache , fatigue , Diarrhoea , chest pain, loss of taste or smell , sore throat , rash]".encode(FORMAT))
+                if((count==0) &(msg != CONSULT_ACTIVATE )&(Pain in msg)):
+>>>>>>> 1f13377445eff202de6fcf2f8983799e998408b0
                     
                     if ("sever" in msg):
                         conn.send("SEE A DOCTOR IMMEDIATELY !!!! ".encode(FORMAT))
@@ -61,7 +83,11 @@ def handle_client(conn, addr):
             print("Timeout")
             print(f"[DISCONNECTED] {addr} has disconnected")
             conn.send("Timeout".encode(FORMAT))
+<<<<<<< HEAD
             time.sleep(10)
+=======
+            time.sleep(50)
+>>>>>>> 1f13377445eff202de6fcf2f8983799e998408b0
             connected=False
             
     conn.close()

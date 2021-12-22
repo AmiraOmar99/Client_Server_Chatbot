@@ -8,10 +8,10 @@ DISCONNECT_MESSAGE = "!DISCONNECT"
 # ALAA's
 # SERVER = "192.168.168.1"
 
-# GAD's
-SERVER = "192.168.1.8"
+# # GAD's
+# SERVER = "192.168.1.8"
 
-# SERVER = socket.gethostbyname(socket.gethostname())
+SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -24,19 +24,22 @@ def send(msg):
     send_length += b' ' * (HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
+  
+def recieve():
     print(client.recv(2048).decode(FORMAT))
-
 
 patient_name=input("Enter Your Name: ")
 send(patient_name)
+recieve()
+
 patient_snn=input("Enter Your SSN: ")
 send(patient_snn)
-patient_ID=input("Enter Your ID: ")
-send(patient_ID)
-patient_age=input("Enter Your Age: ")
-send(patient_age)
+recieve()
+
 consult_activate=input("Enter CONSULT to activate symptoms check: ")
 send(consult_activate)
+recieve()
 pain=input("Your pain is:  ")
 send(pain)
+recieve()
 # send(DISCONNECT_MESSAGE)

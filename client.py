@@ -13,9 +13,13 @@ from cryptography.fernet import Fernet
 key = b'h_31cC-cjISYrMX7FABt_GEXpKRAXerreSXay8LesC0='
 fernet =Fernet(key)
 
+import cryptography
+from cryptography import fernet
+from cryptography.fernet import Fernet
 
+key = b'h_31cC-cjISYrMX7FABt_GEXpKRAXerreSXay8LesC0='
+fernet =Fernet(key)
 
-connected=True
 
 
 mydb = mysql.connect(
@@ -164,9 +168,9 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         
         for item in self.ui.data:
             item.hide()
-        self.ui.add.hide()
-        self.ui.widget.show()
-        self.ui.consult.show()
+        self.add.hide()
+        self.widget.show()
+        self.consult.show()
         if gender =='Female':
             label= 'Ms.'
         else:
@@ -179,10 +183,10 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         common_symp=0
         less_symp=0
         sever_symp=0
-        self.ui.consult.hide()
+        self.consult.hide()
 
-        for i in range(len(self.ui.comm)):
-            if (self.ui.comm[i].isChecked()) :
+        for i in range(len(self.comm)):
+            if (self.comm[i].isChecked()) :
                 common_symp+=1
             
             
@@ -192,9 +196,15 @@ class ApplicationWindow(QtWidgets.QMainWindow):
              
 
 
-        for i in range(len(self.ui.sev)):
-            if (self.ui.sev[i].isChecked()):
+        for i in range(len(self.sev)):
+            if (self.sev[i].isChecked()):
                 sever_symp+=1
+
+        
+        
+        
+        
+        
 
         if (sever_symp>0):
             send("pain is sever")
