@@ -64,7 +64,7 @@ Github Repo: [Link Here](https://github.com/AmiraOmar99/Client_Server_Chatbot)
 11. Data like (Firstname , Lastname , Age , SSN and gander , symptoms ) all will be encrypted with a private key before sending them to server.
 
 **Note**
-Yoy have 30 seconds to enter your data or you will have message that server is disconnected (`TimeOut`) and you will leave the app.
+You have 30 seconds to enter your data or you will have message that server is disconnected (`TimeOut`) and you will leave the app.
 
 
 
