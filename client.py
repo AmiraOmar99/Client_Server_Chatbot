@@ -58,7 +58,7 @@ if y:
 HEADER = 256
 PORT = 5050
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "!DISCONNECT"
+
 
 
 SERVER = socket.gethostbyname(socket.gethostname())
@@ -175,6 +175,7 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         if (sever_symp>0):
             send("pain is sever")
             x= recieve() #recieve the message and save it in x
+            
             self.check_timeout(x) #checks that connection is still going
             self.ui.analysis.setText(x) #write the analysis recieved from the server
                         
@@ -182,12 +183,14 @@ class ApplicationWindow(QtWidgets.QMainWindow):
         elif (less_symp>common_symp):
             send("pain is less")
             x=recieve() #recieve the message and save it in x
+            
             self.check_timeout(x) #checks that connection is still going
             self.ui.analysis.setText(x) #write the analysis recieved from the server
 
         else:
             send("pain is comm")
             x=recieve() #recieve the message and save it in x
+            
             self.check_timeout(x) #checks that connection is still going
             self.ui.analysis.setText(x) #write the analysis recieved from the server
       

@@ -18,7 +18,7 @@ Submitted by:
 | Mariam Mohamed Osama |    2    |  26  |
 
 
-Video: [Link Here](https://link)
+Video: [Link Here](https://drive.google.com/folderview?id=1zVmHJjwi37pXtjncgLXPpABr-uEY7FZe)
 
 Github Repo: [Link Here](https://github.com/AmiraOmar99/Client_Server_Chatbot)
 

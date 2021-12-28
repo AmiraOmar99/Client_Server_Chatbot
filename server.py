@@ -63,7 +63,7 @@ def handle_client(conn, addr): #### handle each connection indvidually ####  #ru
             print("Timeout") 
             print(f"[DISCONNECTED] {addr} has disconnected")
             conn.send("Timeout".encode(FORMAT)) #send time is out for the client
-            time.sleep(30) #wait 30 sec to disconnect
+            time.sleep(8) #wait 8 sec to disconnect
             connected=False
             
     conn.close()
